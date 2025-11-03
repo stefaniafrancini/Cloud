@@ -1,0 +1,85 @@
+:host{
+  --gap: 16px;
+  --card-bg:#fff;
+  --card-border:#e5e7eb;
+  --text:#111827;
+  --muted:#6b7280;
+  --radius:14px;
+  --shadow:0 2px 8px rgba(0,0,0,.06);
+  --accent:#e78cb5; /* combina con tu header */
+  display:block;
+}
+
+.loading{ padding:16px; color:var(--muted); }
+
+.folder-view{ padding: 8px 24px 32px; }
+.title{ margin: 4px 0 20px; font-size:22px; font-weight:700; color:var(--text); }
+
+.row{ margin-bottom: 26px; }
+.row-head{
+  display:flex; align-items:center; justify-content:space-between;
+  margin-bottom: 10px;
+}
+.row-head h3{ margin:0; font-size:18px; color:var(--text); }
+.title {
+  color: #e33483 !important; /* Rosa principal */
+  font-weight: 700;
+  font-size: 20px;
+}
+.name{color: #df6ca0 !important; }
+
+.arrows{ display:flex; gap:6px; }
+.nav{
+  width:32px; height:32px; border-radius:8px; border:1px solid var(--card-border);
+  background:#f9fafb; cursor:pointer; font-size:18px; line-height:1;
+}
+.nav:hover{ background:#f3f4f6; }
+
+.empty{ color:var(--muted); font-style:italic; margin: 8px 0 12px; }
+
+/* Rail: 5 cards por vista, con scroll suave */
+.rail{
+  display:flex;
+  gap: var(--gap);
+  overflow-x:auto;
+  scroll-behavior:smooth;
+  scrollbar-width:none; /* Firefox */
+  padding: 6px 2px;
+}
+.rail::-webkit-scrollbar{ display:none; }
+
+/* 5 por pantalla: cada tarjeta ocupa 1/5 del ancho (4 gaps) */
+.card{
+  flex: 0 0 calc((100% - (var(--gap) * 4)) / 5);
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  display:flex;
+  flex-direction:column;
+  min-height: 220px;
+}
+
+/* Centrar cuando hay menos de 5 */
+.rail.center{ justify-content:center; }
+
+/* Imagen */
+.thumb{
+  position:relative;
+  width:100%;
+  aspect-ratio: 4 / 3;          /* relación consistente */
+  background:#f3f4f6;
+  display:flex; align-items:center; justify-content:center;
+}
+.thumb img{
+  width:100%; height:100%; object-fit:cover; display:block;
+  background:#fff;
+}
+.noimg{ color:var(--muted); font-size:13px; }
+
+/* Texto */
+.meta{ padding:10px 12px; }
+.name{ margin:0 0 4px; font-size:15px; font-weight:600; color:var(--text); }
+.sub{ margin:0; font-size:13px; color:var(--muted); }
+

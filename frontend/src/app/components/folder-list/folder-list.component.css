@@ -1,0 +1,74 @@
+/* Variables locales al componente */
+:host {
+  --card-bg: #fff;
+  --card-border: #e5e7eb;
+  --card-text: #111827;
+  --muted: #6b7280;
+  --radius: 14px;
+  --shadow: 0 2px 6px rgba(0,0,0,.05);
+  --shadow-hover: 0 6px 14px rgba(0,0,0,.08);
+  --primary: #e78cb5;
+  --danger: #dc2626;
+
+  display: block;             /* asegura que el host expanda */
+  padding: 12px 0 32px;       /* un poco de aire */
+}
+
+/* Limitar ancho y centrar contenido */
+.container-limit {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.folders-title {
+  font-size: 22px;
+  font-weight: 600;
+  margin: 16px 0 12px;
+  color: var(--card-text);
+  text-align: center;
+  color: #d81b60;
+}
+
+.toolbar { text-align: right; margin-bottom: 16px; }
+
+.folder-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 24px;
+}
+
+.folder-card { display: flex; flex-direction: column; gap: 8px; }
+
+.card-main {
+  width: 100%;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius);
+  padding: 18px 16px;
+  text-align: left;
+  box-shadow: var(--shadow);
+  cursor: pointer;
+  transition: all .15s ease-in-out;
+}
+
+.card-main:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-hover);
+  border-color: var(--primary);
+}
+
+.card-header { display: flex; align-items: center; gap: 12px; margin-bottom: 6px; }
+.card-icon { font-size: 26px; color: var(--primary); }
+.card-title { font-weight: 600; font-size: 17px; color: #db5083; }
+.card-desc { font-size: 14px; color: var(--muted); }
+
+.card-actions { display: flex; justify-content: flex-end; gap: 8px; }
+
+.btn { border: none; border-radius: 8px; padding: 6px 12px; font-size: 14px; cursor: pointer; transition: .2s; }
+.btn:hover { opacity: .9; }
+.btn-primary { background: var(--primary); color: #fff; }
+.btn-secondary { background: #f9fafb; border: 1px solid var(--card-border); color: #333; }
+.btn-danger { background: var(--danger); color: #fff; }
+
+.empty { text-align: center; color: var(--muted); padding: 20px; font-style: italic; }

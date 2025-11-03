@@ -1,0 +1,48 @@
+<div class="form-container">
+  <h2>Editar Prenda</h2>
+
+  <div *ngIf="loading">Cargando...</div>
+
+  <form *ngIf="!loading" (submit)="save(); $event.preventDefault();">
+    <div class="form-group">
+      <label>Nombre:</label>
+      <input [(ngModel)]="garment.name" name="name" required />
+    </div>
+
+    <div class="form-group">
+      <label>Categoría:</label>
+      <select [(ngModel)]="garment.category" name="category" required>
+        <option value="">Seleccione</option>
+        <option value="camisa">Camisa</option>
+        <option value="pantalon">Pantalón</option>
+        <option value="zapato">Zapato</option>
+        <option value="accesorio">Accesorio</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>Color:</label>
+      <input [(ngModel)]="garment.color" name="color" required />
+    </div>
+
+    <div class="preview-section" *ngIf="garment.image">
+      <label>Imagen actual:</label>
+      <img [src]="garment.image" alt="Imagen actual" class="image-preview" />
+    </div>
+
+    <div class="form-group">
+      <label>Nueva Imagen (opcional):</label>
+      <input type="file" (change)="onFileChange($event)" />
+    </div>
+
+    <button type="submit" class="submit-btn">Guardar Cambios</button>
+  </form>
+</div>
+
+<!-- Modal de éxito -->
+<div class="modal-overlay" *ngIf="showSuccess">
+  <div class="modal-message">
+    <p>Prenda actualizada.</p>
+    <button (click)="closeModal()">Cerrar</button>
+  </div>
+</div>

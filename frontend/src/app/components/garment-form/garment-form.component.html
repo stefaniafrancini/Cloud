@@ -1,0 +1,42 @@
+<div class="form-container">
+  <h2>Crear Nueva Prenda</h2>
+
+  <form (submit)="save(); $event.preventDefault();">
+    <div class="form-group">
+      <label>Nombre:</label>
+      <input [(ngModel)]="name" name="name" required />
+    </div>
+
+    <div class="form-group">
+      <label>Categoría:</label>
+      <select [(ngModel)]="category" name="category" required>
+        <option value="">Seleccione</option>
+        <option value="camisa">Camisa</option>
+        <option value="pantalon">Pantalón</option>
+        <option value="zapato">Zapato</option>
+        <option value="accesorio">Accesorio</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>Color:</label>
+      <input [(ngModel)]="color" name="color" required />
+    </div>
+
+    <div class="form-group">
+      <label>Imagen:</label>
+      <input type="file" (change)="onFileChange($event)" />
+    </div>
+
+    <button type="submit">Guardar</button>
+  </form>
+</div>
+
+<!-- 🌸 ALERTA ROSA -->
+<div class="alert-backdrop" *ngIf="showAlert">
+  <div class="alert-box">
+    <p>Por favor, completá todos los campos:</p>
+      <p>nombre, categoría y color.</p>
+    <button (click)="closeAlert()">Cerrar</button>
+  </div>
+</div>

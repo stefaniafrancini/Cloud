@@ -1,0 +1,93 @@
+<h2 class="form-title">Crear Nuevo Outfit</h2>
+
+
+<form (submit)="save(); $event.preventDefault();" class="outfit-form">
+  <div>
+    <label>Nombre:</label>
+    <input [(ngModel)]="name" name="name" required />
+  </div>
+
+  <div>
+    <label>Imagen:</label>
+    <input type="file" (change)="onFileChange($event)" />
+  </div>
+
+  <div>
+    <label>Prendas:</label>
+
+    <div *ngFor="let categoria of categorias">
+      <!-- Toggle de categoría -->
+      <div class="cat-head">
+        <button
+          type="button"
+          class="cat-toggle"
+          (click)="toggleCategoria(categoria)"
+          [attr.aria-expanded]="!collapsed[categoria]"
+          [attr.aria-controls]="'sec-' + categoria"
+        >
+          <span class="chev">{{ collapsed[categoria] ? '▸' : '▾' }}</span>
+          <span class="cat-name">{{ categoria }}</span>
+          <span class="pill" *ngIf="selectedCount(categoria) > 0">
+            {{ selectedCount(categoria) }}
+          </span>
+        </button>
+      </div>
+
+      <!-- Carrusel -->
+      <div
+        class="carousel"
+        [id]="'sec-' + categoria"
+        *ngIf="!collapsed[categoria]"
+      >
+        <button type="button" (click)="retroceder(categoria)">←</button>
+
+        <div class="card-container">
+          <div
+            class="card"
+            *ngFor="let g of getPrendasPorCategoria(categoria) | slice:carouselIndex[categoria]:carouselIndex[categoria]+3"
+          >
+            <img [src]="g.image" alt="{{ g.name }}" />
+            <label class="garment-name">{{ g.name }}</label>
+            <div class="checkbox-wrap">
+              <input
+                type="checkbox"
+                [value]="g.id"
+                (change)="onCheckboxChange($event, g.id!)"
+                [checked]="selectedGarments.includes(g.id!)"
+              />
+            </div>
+          </div>
+        </div>
+
+        <button type="button" (click)="avanzar(categoria)">→</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Fila SIEMPRE visible con seleccionadas -->
+  <div *ngIf="selectedGarments.length > 0">
+    <h4>Prendas seleccionadas</h4>
+    <div class="carousel selected-carousel">
+      <div class="card-container">
+        <div class="card" *ngFor="let g of getSelectedGarments()">
+          <img [src]="g.image" alt="{{ g.name }}" />
+          <label class="garment-name">{{ g.name }}</label>
+          <!-- (opcional) mostrar un tilde visual -->
+          <div class="checkbox-wrap">
+            <input type="checkbox" checked disabled />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button type="submit" class="submit-btn">Guardar</button>
+</form>
+
+<!-- Modal 💖 -->
+<div *ngIf="modalVisible" class="modal">
+  <div class="modal-content">
+    <p>{{ modalMessage }}</p>
+    <button (click)="cerrarModal()">Cerrar</button>
+  </div>
+</div>

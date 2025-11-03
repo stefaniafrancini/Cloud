@@ -1,0 +1,16 @@
+<h2>Listado de Outfits</h2>
+
+<div *ngIf="outfits.length === 0">
+  No hay outfits cargados.
+</div>
+
+<div class="outfit-grid">
+  <div class="outfit-card" *ngFor="let o of outfits" (click)="verDetalle(o)">
+    <img *ngIf="o.image" [src]="o.image" alt="Imagen de {{ o.name }}" />
+    <h3>{{ o.name }}</h3>
+    <ul>
+      <li *ngFor="let id of o.garments">{{ getGarmentNameById(id) }}</li>
+    </ul>
+    <button (click)="deleteOutfit(o.id!); $event.stopPropagation()">Eliminar</button>
+  </div>
+</div>

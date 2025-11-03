@@ -1,0 +1,60 @@
+<h2>Listado de Prendas</h2>
+
+<input
+  type="text"
+  [(ngModel)]="searchTerm"
+  (ngModelChange)="filtrarPrendas()"
+  placeholder="Buscar prenda por nombre..."
+  class="search-input"
+/>
+
+
+<!-- Botón para activar/desactivar la selección -->
+<button class="toggle-select-btn" (click)="toggleSelection()">
+  {{ showActions ? 'Cancelar Selección' : 'Seleccionar' }}
+</button>
+
+<!-- Mensaje si no hay prendas -->
+<div *ngIf="filteredGarments.length === 0">
+  No hay prendas cargadas.
+</div>
+
+<!-- Grilla de cards -->
+<div class="garment-grid" [ngClass]="{ 'actions-on': showActions }">
+  <div class="garment-card" *ngFor="let g of filteredGarments">
+    <img [src]="g.image" alt="Imagen" />
+    <h3>{{ g.name }}</h3>
+    <p><strong>Categoría:</strong> {{ g.category }}</p>
+    <p><strong>Color:</strong> {{ g.color }}</p>
+
+    <!-- Botón fijo -->
+    <div class="button-row">
+      <button (click)="openModal(g.id!)">Añadir a carpeta</button>
+    </div>
+
+    <!-- Botones que solo aparecen al activar selección -->
+    <div class="action-row" *ngIf="showActions">
+      <button (click)="confirmDelete(g.id!)">Eliminar</button>
+      <a [routerLink]="['/editar-prenda', g.id]">Editar</a>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<app-assign-to-folder-modal
+  *ngIf="showModal"
+  [itemId]="selectedGarmentId"
+  itemType="garment"
+  (closed)="showModal = false">
+</app-assign-to-folder-modal>
+
+<!-- Modal de Confirmación -->
+<div class="modal-backdrop" *ngIf="showConfirm">
+  <div class="custom-modal">
+    <p>¿Estás seguro que deseas eliminar esta prenda?</p>
+    <div class="modal-buttons">
+      <button (click)="cancelDelete()" class="cancel-btn">Cancelar</button>
+      <button (click)="deleteConfirmed()" class="confirm-btn">Eliminar</button>
+    </div>
+  </div>
+</div>

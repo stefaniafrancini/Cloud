@@ -1,0 +1,141 @@
+/* ====== Paleta (dentro del componente) ====== */
+:host{
+  --pink-100:#E694B0;
+  --pink-200:#FCF1F8; /* navbar rosita bebé */
+  --pink-300:#FCF1F8;
+  --text-dark:#222;
+  --white:#fff;
+}
+
+/* ====== Navbar ====== */
+nav.navbar{
+  position: sticky;
+  top: 0;
+  inset: 0 0 auto 0;   /* asegura ancho completo */
+  z-index: 2000;
+  width: 100%;
+  height: 58px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  background-color: var(--pink-200, #f3aee3) !important; /* ahora sí rosa */
+  color: var(--text-dark);
+  box-shadow: 0 1px 0 rgba(0,0,0,.06);
+}
+
+.navbar-left .logo-link{
+  font-weight: 700;
+  text-decoration: none;
+  color: var(--text-dark);
+}
+
+.logo-link {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.logo-img {
+  height: 48px;     
+  width: auto;       
+  display: block;
+}
+
+.navbar-right{
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* ====== Dropdown ====== */
+.dropdown{
+  position: relative;
+  padding-bottom: 8px; /* evita perder hover entre botón y menú */
+}
+
+.dropbtn{
+  height: 34px;
+  padding: 0 12px;
+  border: 0;
+  border-radius: 8px;
+  background: rgba(255,255,255,.35);
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+.dropbtn:hover,
+.dropbtn:focus{ background: rgba(255,255,255,.55); }
+
+
+
+.dropdown:hover .dropdown-content,
+.dropdown:focus-within .dropdown-content{ display: block; }
+
+.dropdown-content{
+  position: absolute;
+  top: 100%;
+  right: 0;
+  min-width: 220px;
+  max-width: min(280px, calc(100vw - 16px));
+  max-height: calc(100vh - 96px);
+  overflow: hidden;          /* clave: el hover llega hasta los bordes redondeados */
+  background: var(--white);
+  border-radius: 10px;
+  box-shadow: 0 10px 28px rgba(0,0,0,.12), 0 3px 8px rgba(0,0,0,.06);
+  padding: 0;                /* sin colchón → no queda margen blanco */
+  display: none;
+  z-index: 2100;
+  box-sizing: border-box;
+}
+
+/* Ítems */
+.dropdown-content a{
+  display: block;
+  width: 100%;
+  padding: 12px 16px;        /* espacio interno del ítem, no del contenedor */
+  margin: 0;                 /* evita “ranuras” laterales */
+  border-radius: 0;          /* el color cubre toda la fila */
+  text-decoration: none;
+  color: var(--text-dark);
+  line-height: 1.2;
+  outline: none;
+  box-sizing: border-box;
+}
+
+/* separador fino (opcional) entre ítems */
+.dropdown-content a + a{
+  border-top: 1px solid rgba(0,0,0,.04);
+}
+
+/* Hover/activo: pinta COMPLETO */
+.dropdown-content a:hover,
+.dropdown-content a:focus,
+.dropdown-content a.active,
+.dropdown-content a[aria-current="page"]{
+  background: var(--pink-100);
+}
+
+
+/* ====== Contenido principal ====== */
+.main-container{ padding: 24px 18px; }
+
+/* ====== Fix global de layout (seguros dentro del componente) ====== */
+*,
+*::before,
+*::after{ box-sizing: border-box; }
+
+html, body{
+  padding: 0;
+  margin: 0;
+  overflow-x: hidden;
+}
+
+/* ====== Responsive ====== */
+@media (max-width: 640px){
+  .dropdown-content{
+    right: 8px;
+    max-width: calc(100vw - 16px);
+  }
+}

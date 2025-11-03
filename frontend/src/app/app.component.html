@@ -1,0 +1,33 @@
+<!-- app.component.html -->
+<nav class="navbar">
+  <div class="navbar-left">
+    <a routerLink="/" class="logo-link" aria-label="Inicio">
+      <img src="/logo.jpg" alt="Mi Ropero" class="logo-img" />
+    </a>
+  </div>
+
+  <div class="navbar-right">
+    <!-- Dropdown Prendas -->
+    <div class="dropdown">
+      <button class="dropbtn">Prendas</button>
+      <div class="dropdown-content">
+        <a routerLink="/prendas">Listado de Prendas</a>
+        <a routerLink="/crear-prenda">Crear Prenda</a>
+      </div>
+    </div>
+
+    <!-- Dropdown Outfits -->
+    <div class="dropdown">
+      <button class="dropbtn">Outfits</button>
+      <div class="dropdown-content">
+        <a routerLink="/outfits">Listado de Outfits</a>
+        <a routerLink="/crear-outfit">Crear Outfit</a>
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+<div class="main-container">
+  <router-outlet></router-outlet>
+</div>

@@ -1,0 +1,34 @@
+<div class="container-limit">
+  <h2 class="folders-title">Listado de Carpetas</h2>
+
+  <div class="toolbar">
+    <button (click)="toggleEditing()" class="btn btn-primary">
+      {{ editingMode ? 'Salir de edición' : 'Editar carpetas' }}
+    </button>
+  </div>
+
+  <div *ngIf="folders.length === 0" class="empty">No hay carpetas creadas.</div>
+
+  <div class="folder-grid" [class.editing]="editingMode">
+    <div *ngFor="let f of folders" class="folder-card">
+      <button
+        type="button"
+        class="card-main"
+        (click)="goToFolder(f.id!)"
+        [disabled]="editingMode"
+        [attr.aria-labelledby]="'folder-title-' + f.id"
+      >
+        <div class="card-header">
+          <div class="card-icon" aria-hidden="true">📁</div>
+          <div class="card-title" [id]="'folder-title-' + f.id">{{ f.name }}</div>
+        </div>
+        <div class="card-desc">{{ f.description || 'Sin descripción' }}</div>
+      </button>
+
+      <div class="card-actions" *ngIf="editingMode && f.name !== 'Mi Ropero' && f.id !== undefined">
+        <button (click)="deleteFolder(f.id!)" class="btn btn-danger">Eliminar</button>
+        <a [routerLink]="['/editar-carpeta', f.id]" class="btn btn-secondary">Editar</a>
+      </div>
+    </div>
+  </div>
+</div>

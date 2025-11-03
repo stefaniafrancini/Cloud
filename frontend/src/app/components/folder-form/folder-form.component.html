@@ -1,0 +1,24 @@
+<h2>Crear Nueva Carpeta</h2>
+
+<form (submit)="save(); $event.preventDefault();" class="folder-form">
+  <div>
+    <label>Nombre:</label>
+    <input [(ngModel)]="name" name="name" required />
+  </div>
+
+  <div>
+    <label>Descripción:</label>
+    <textarea [(ngModel)]="description" name="description"></textarea>
+  </div>
+
+  <button type="submit" class="submit-btn">Guardar</button>
+</form>
+
+
+<!-- Modal personalizado -->
+<div class="modal" *ngIf="modalVisible">
+  <div class="modal-content">
+    <p>{{ modalMessage }}</p>
+    <button (click)="cerrarModal()">Cerrar</button>
+  </div>
+</div>

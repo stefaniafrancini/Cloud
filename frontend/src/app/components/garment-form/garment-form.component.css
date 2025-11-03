@@ -1,0 +1,125 @@
+body {
+  background-color: #fff3fa;
+  font-family: 'Segoe UI', sans-serif;
+  margin: 0;
+}
+
+.form-container {
+  max-width: 450px;
+  margin: 60px auto;
+  background-color: #ffe0ef;
+  padding: 40px 35px;
+  border-radius: 25px;
+  box-shadow: 0 10px 25px rgba(229, 141, 209, 0.3);
+}
+
+h2 {
+  text-align: center;
+  color: #c2185b;
+  font-size: 24px;
+  margin-bottom: 30px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+  color: #b21264;
+  font-weight: 600;
+  font-size: 15px;
+}
+
+input[type="text"],
+select,
+input[type="file"],
+input {
+  width: 100%;
+  padding: 13px 16px;
+  height: 45px;
+  border: 1px solid #E694B0;
+  border-radius: 15px;
+  background-color: #fae8f1;
+  font-size: 15px;
+  outline: none;
+  box-sizing: border-box;
+  transition: all 0.2s ease;
+  display: block;
+  appearance: none;
+}
+
+input[type="file"] {
+  padding: 10px 14px;
+  height: auto;
+}
+
+input:focus,
+select:focus {
+  border-color: #d94fbd;
+  box-shadow: 0 0 0 3px rgba(233, 30, 99, 0.1);
+}
+
+button {
+  width: 100%;
+  padding: 14px;
+  background-color: #E694B0;
+  border: none;
+  border-radius: 25px;
+  color: white;
+  font-weight: bold;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #d94fbd;
+}
+
+.alert-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.alert-box {
+  background-color: #ffe0ef;
+  color: #cc0052;
+  padding: 25px 35px;
+  border-radius: 16px;
+  text-align: center;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  font-family: 'Poppins', sans-serif;
+}
+
+.alert-box p {
+  margin-bottom: 5px;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.alert-box button {
+  background-color: #ec407a;
+  color: white;
+  border: none;
+  padding: 8px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.2s;
+  margin-top: 15px;
+  width: auto;
+}
+
+.alert-box button:hover {
+  background-color: #e03e77;
+}

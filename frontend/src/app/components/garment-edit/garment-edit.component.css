@@ -1,0 +1,155 @@
+body {
+  background-color: #fff3fa;
+  font-family: 'Segoe UI', sans-serif;
+  margin: 0;
+}
+
+.form-container {
+  max-width: 480px;
+  margin: 60px auto;
+  background-color: #ffe0ef;
+  padding: 40px 35px;
+  border-radius: 25px;
+  box-shadow: 0 10px 25px rgba(229, 141, 209, 0.3);
+}
+
+h2 {
+  text-align: center;
+  color: #c2185b;
+  font-size: 24px;
+  margin-bottom: 30px;
+}
+
+.form-group {
+  margin-bottom: 22px;
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+  color: #b21264;
+  font-weight: 600;
+  font-size: 15px;
+}
+
+input[type="text"],
+input[type="file"],
+select, input {
+  width: 100%;
+  padding: 13px 15px;
+  border: 2px solid #e58dd1;
+  border-radius: 18px;
+  background-color: #fae8f1;
+  font-size: 15px;
+  outline: none;
+  box-sizing: border-box;
+  height: 48px;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+input:focus,
+select:focus {
+  border-color: #d94fbd;
+  box-shadow: 0 0 0 3px rgba(233, 30, 99, 0.1);
+}
+
+.image-preview {
+  display: block;
+  margin: 10px auto 0 auto;
+  max-width: 90%;
+  height: auto;
+  border-radius: 15px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.submit-btn {
+  width: 100%;
+  padding: 14px;
+  background-color: #E694B0;
+  border: none;
+  border-radius: 25px;
+  color: white;
+  font-weight: bold;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.submit-btn:hover {
+  background-color: #d94fbd;
+}
+
+.preview-section {
+  margin-bottom: 25px;
+  text-align: center;
+}
+
+.preview-section label {
+  margin-bottom: 6px;
+  display: inline-block;
+}
+
+/* ===================== */
+/* ALERTA MODAL ESTÉTICA */
+/* ===================== */
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(50, 0, 40, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-message {
+  background: white;
+  padding: 40px 50px;
+  border-radius: 25px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+  text-align: center;
+  animation: fadeIn 0.4s ease-out;
+  max-width: 400px;
+  width: 90%;
+}
+
+.modal-message p {
+  margin: 0 0 20px;
+  font-size: 18px;
+  color: #b21264;
+  font-weight: bold;
+}
+
+.modal-message button {
+  background-color: #e658b9;
+  color: white;
+  border: none;
+  padding: 12px 26px;
+  border-radius: 18px;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.modal-message button:hover {
+  background-color: #d94fbd;
+}
+
+/* animación suave */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}

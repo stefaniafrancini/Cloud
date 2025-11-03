@@ -1,0 +1,20 @@
+<div class="modal-overlay">
+  <div class="modal-content">
+    <h3>Asignar a Carpeta</h3>
+
+    <!-- Mensaje de éxito aesthetic -->
+    <div *ngIf="showSuccess" class="success-toast-inside">
+      ✅ {{ successMessage }}
+    </div>
+
+    <select [(ngModel)]="selectedFolderId">
+      <option [ngValue]="undefined">Selecciona una carpeta</option>
+      <option *ngFor="let f of folders" [ngValue]="f.id">{{ f.name }}</option>
+    </select>
+
+    <div class="modal-buttons">
+      <button (click)="assign()">Asignar</button>
+      <button (click)="close()">Cancelar</button>
+    </div>
+  </div>
+</div>

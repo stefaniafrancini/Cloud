@@ -1,0 +1,121 @@
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(240, 120, 180, 0.2);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+.modal-content {
+  background-color: #fff0f8;
+  border: 2px solid #f8bbd0;
+  border-radius: 25px;
+  padding: 30px;
+  width: 320px;
+  box-shadow: 0 10px 25px rgba(229, 141, 209, 0.4);
+  text-align: center;
+}
+
+.modal-content h3 {
+  margin-bottom: 20px;
+  font-size: 20px;
+  color: #c2185b;
+}
+
+.modal-content select {
+  width: 100%;
+  padding: 10px 12px;
+  border: 2px solid #ec407a;
+  border-radius: 15px;
+  background-color: #ffffff;
+  font-size: 15px;
+  margin-bottom: 25px;
+  outline: none;
+  transition: border 0.3s;
+}
+
+.modal-content select:focus {
+  border-color: #d81b60;
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.modal-buttons button {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  border-radius: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+}
+
+.modal-buttons button:first-child {
+  background-color: #ec407a;
+  color: white;
+}
+
+.modal-buttons button:first-child:hover {
+  background-color: #d81b60;
+}
+
+.modal-buttons button:last-child {
+  background-color: #fce4ec;
+  color: #d81b60;
+}
+
+.modal-buttons button:last-child:hover {
+  background-color: #f8bbd0;
+}
+
+/* ✅ Mensaje */
+.success-toast {
+  position: absolute;
+  bottom: -70px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #fce4ec;
+  border: 2px solid #f8bbd0;
+  padding: 15px 25px;
+  border-radius: 20px;
+  box-shadow: 0 6px 18px rgba(229, 141, 209, 0.3);
+  color: #880e4f;
+  font-weight: 600;
+  font-size: 14px;
+  z-index: 9999;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+.success-toast-inside {
+  background-color: #fce4ec;
+  border: 2px solid #f8bbd0;
+  padding: 10px 20px;
+  border-radius: 15px;
+  color: #880e4f;
+  font-weight: 600;
+  font-size: 14px;
+  margin-bottom: 15px;
+  animation: fadeIn 0.3s ease;
+}

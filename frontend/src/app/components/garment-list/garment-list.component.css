@@ -1,0 +1,199 @@
+h2 {
+  text-align: center;
+  color: #c2185b;
+  margin-bottom: 25px;
+}
+
+.toggle-select-btn {
+  display: block;
+  margin: 0 auto 30px auto;
+  background-color: #E694B0;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 15px;
+  transition: background-color 0.3s;
+}
+
+.toggle-select-btn:hover {
+  background-color: #d8658c;
+}
+
+.garment-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.garment-card {
+  background-color: #fff0f8;
+  border: 2px solid #f8bbd0;
+  border-radius: 20px;
+  width: 220px;
+  padding: 15px;
+  box-shadow: 0 4px 10px rgba(229, 141, 209, 0.2);
+  text-align: center;
+  transition: transform 0.2s;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.garment-card:hover {
+  transform: scale(1.02);
+}
+
+.garment-card img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 15px;
+  margin-bottom: 10px;
+}
+
+.garment-card h3 {
+  font-size: 16px;
+  margin: 8px 0 4px 0;
+  color: #ad1457;
+}
+
+.garment-card p {
+  margin: 2px 0;
+  font-size: 14px;
+}
+
+.button-row {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.button-row button {
+  background-color: #E694B0;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  padding: 8px 12px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.button-row button:hover {
+  background-color: #d81b60;
+}
+
+.action-row {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+
+.action-row button,
+.action-row a {
+  background-color: white;
+  border: 1.5px solid #e91e63;
+  border-radius: 15px;
+  padding: 6px 10px;
+  font-size: 13px;
+  color: #e91e63;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background-color 0.2s;
+}
+
+.action-row button:hover,
+.action-row a:hover {
+  background-color: #fce4ec;
+}
+
+/* Modal fondo gris semi transparente */
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(204, 153, 204, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+/* Contenedor de la alerta */
+.custom-modal {
+  background: white;
+  padding: 30px;
+  border-radius: 20px;
+  text-align: center;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  border: 3px solid #f06292;
+  width: 350px;
+}
+
+/* Texto */
+.custom-modal p {
+  font-size: 18px;
+  margin-bottom: 20px;
+  color: #d81b60;
+}
+
+/* Botones */
+.modal-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+.modal-buttons button {
+  padding: 10px 20px;
+  border-radius: 15px;
+  font-weight: bold;
+  cursor: pointer;
+  border: none;
+  transition: all 0.3s;
+}
+
+.cancel-btn {
+  background: white;
+  color: #e91e63;
+  border: 1.5px solid #e91e63;
+}
+
+.cancel-btn:hover {
+  background: #fce4ec;
+}
+
+.confirm-btn {
+  background: #e91e63;
+  color: white;
+}
+
+.confirm-btn:hover {
+  background: #c2185b;
+}
+
+.search-input {
+  display: block;
+  margin: 0 auto 20px auto;
+  padding: 10px 15px;
+  border: 2px solid #f8bbd0;
+  border-radius: 20px;
+  font-size: 14px;
+  width: 280px;
+  outline: none;
+  color: #880e4f;
+  background-color: #fff0f8;
+  box-shadow: 0 2px 6px rgba(229, 141, 209, 0.2);
+  transition: border-color 0.3s;
+}
+
+.search-input:focus {
+  border-color: #ec407a;
+}
