@@ -1,4 +1,3 @@
-# app/serializers.py
 from rest_framework import serializers
 from .models import Garment, Outfit, Folder
 
@@ -59,10 +58,6 @@ class FolderSerializer(serializers.ModelSerializer):
         fields = ['id', 'owner', 'name', 'is_default', 'description', 'garments', 'outfits']
 
     def validate(self, data):
-        """
-        Evita que se intente crear/editar otra default desde el serializer directamente.
-        La lógica principal está en la view, pero esto agrega una red extra.
-        """
         name = (data.get('name') or '').strip().lower()
         is_default = data.get('is_default', False)
         if is_default or name == 'mi ropero':

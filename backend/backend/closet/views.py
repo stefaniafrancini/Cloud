@@ -1,10 +1,11 @@
-# app/views.py
 from django.db import transaction
 from django.shortcuts import get_object_or_404
 from rest_framework import viewsets, status, serializers, permissions
-from rest_framework.decorators import action
+from rest_framework.decorators import action, api_view, permission_classes
 from rest_framework.response import Response
 from rest_framework.parsers import MultiPartParser, FormParser, JSONParser
+from rest_framework.permissions import IsAuthenticated
+
 from .models import Garment, Outfit, Folder
 from .serializers import GarmentSerializer, OutfitSerializer, FolderSerializer
 
@@ -21,11 +22,7 @@ class OwnerViewSetMixin:
     permission_classes = [permissions.IsAuthenticated, IsOwner]
 
     def get_queryset(self):
-        # Cada viewset define su model via .queryset.model o .serializer_class.Meta.model
-        Model = getattr(self.queryset, "model", None) or getattr(self.serializer_class.Meta, "model", None)
-        if Model is None:
-            return super().get_queryset()
-        return Model.objects.filter(owner=self.request.user)
+        return self.queryset.filter(owner=self.request.user)
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
@@ -39,77 +36,11 @@ class GarmentViewSet(OwnerViewSetMixin, viewsets.ModelViewSet):
 
 
 # ===== Outfits =====
+# Simplificado: dejamos que el serializer maneje M2M y validaciones.
 class OutfitViewSet(OwnerViewSetMixin, viewsets.ModelViewSet):
     queryset = Outfit.objects.all()
     serializer_class = OutfitSerializer
     parser_classes = [MultiPartParser, FormParser, JSONParser]
-
-    def _extract_id_list(self, request, key: str):
-        """
-        Soporta:
-        - multipart/form-data -> request.data.getlist(key)
-        - application/json -> list nativo
-        - string "1,2,3" -> split
-        - single value -> [value]
-        """
-        data = request.data
-        if hasattr(data, "getlist"):
-            ids = data.getlist(key)
-            # Si viene como ['1,2,3'] lo partimos
-            if len(ids) == 1 and isinstance(ids[0], str) and "," in ids[0]:
-                ids = [x.strip() for x in ids[0].split(",") if x.strip()]
-            return [int(x) for x in ids]
-
-        raw = data.get(key, [])
-        if isinstance(raw, list):
-            return [int(x) for x in raw]
-        if isinstance(raw, str):
-            if "," in raw:
-                return [int(x.strip()) for x in raw.split(",") if x.strip()]
-            return [int(raw)]
-        if raw is None:
-            return []
-        return [int(raw)]
-
-    @transaction.atomic
-    def create(self, request, *args, **kwargs):
-        garment_ids = self._extract_id_list(request, "garments")
-        if len(garment_ids) < 2:
-            return Response({"error": "Debe seleccionar al menos 2 prendas."}, status=status.HTTP_400_BAD_REQUEST)
-
-        # Validar que todas las prendas pertenezcan al usuario
-        user_garments = Garment.objects.filter(owner=request.user, id__in=garment_ids)
-        if user_garments.count() != len(set(garment_ids)):
-            return Response({"error": "Hay prendas que no pertenecen al usuario."}, status=status.HTTP_400_BAD_REQUEST)
-
-        response = super().create(request, *args, **kwargs)
-
-        # Asignar M2M si el serializer no lo hizo automáticamente (según tu serializer)
-        outfit_id = response.data.get("id")
-        if outfit_id and garment_ids:
-            outfit = Outfit.objects.get(id=outfit_id, owner=request.user)
-            outfit.garments.set(user_garments)
-
-        return response
-
-    @transaction.atomic
-    def update(self, request, *args, **kwargs):
-        # Permitir actualizar garments con las mismas validaciones
-        garment_ids = self._extract_id_list(request, "garments")
-        if garment_ids:
-            if len(garment_ids) < 2:
-                return Response({"error": "Debe seleccionar al menos 2 prendas."}, status=status.HTTP_400_BAD_REQUEST)
-            user_garments = Garment.objects.filter(owner=request.user, id__in=garment_ids)
-            if user_garments.count() != len(set(garment_ids)):
-                return Response({"error": "Hay prendas que no pertenecen al usuario."}, status=status.HTTP_400_BAD_REQUEST)
-
-        response = super().update(request, *args, **kwargs)
-
-        if garment_ids:
-            outfit = self.get_object()
-            outfit.garments.set(user_garments)
-
-        return response
 
 
 # ===== Folders =====
@@ -157,7 +88,7 @@ class FolderViewSet(OwnerViewSetMixin, viewsets.ModelViewSet):
                             status=status.HTTP_400_BAD_REQUEST)
         return super().destroy(request, *args, **kwargs)
 
-    # ------ Acciones para agregar elementos con control de dueño ------
+    # ------ Acciones para agregar/remover con control de dueño ------
     @action(detail=True, methods=["post"])
     def add_garment(self, request, pk=None):
         folder = self.get_object()  # ya verifica IsOwner
@@ -201,3 +132,10 @@ class FolderViewSet(OwnerViewSetMixin, viewsets.ModelViewSet):
         outfit = get_object_or_404(Outfit, id=outfit_id, owner=request.user)
         folder.outfits.remove(outfit)
         return Response({"status": "Outfit removido de la carpeta."})
+
+
+@api_view(["GET"])
+@permission_classes([IsAuthenticated])
+def me(request):
+    u = request.user
+    return Response({"id": u.id, "username": u.username, "email": u.email})

@@ -11,11 +11,13 @@ class Garment(models.Model):
         ('accesorio', 'Accesorio'),
     ]
 
-    owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='garments')
+    owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='garments', null=True)
     name = models.CharField(max_length=100)
     category = models.CharField(max_length=20, choices=CATEGORY_CHOICES)
     color = models.CharField(max_length=50)
     image = models.ImageField(upload_to='garments/')
+
+
 
     class Meta:
         unique_together = [('owner', 'name')]
@@ -27,7 +29,7 @@ class Garment(models.Model):
 
 
 class Outfit(models.Model):
-    owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='outfits')
+    owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='outfits', null=True)
     name = models.CharField(max_length=100)
     image = models.ImageField(upload_to='outfits/', blank=True, null=True)
     garments = models.ManyToManyField(Garment, blank=True, related_name='outfits')
@@ -48,7 +50,7 @@ class Outfit(models.Model):
 
 
 class Folder(models.Model):
-    owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='folders')
+    owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='folders', null=True)
     name = models.CharField(max_length=100)
     garments = models.ManyToManyField(Garment, blank=True, related_name='folders')
     outfits = models.ManyToManyField(Outfit, blank=True, related_name='folders')
