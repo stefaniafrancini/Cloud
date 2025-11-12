@@ -54,6 +54,6 @@ export class OutfitListComponent implements OnInit {
   }
 
   verDetalle(outfit: Outfit): void {
-    this.router.navigate(['/outfit', outfit.id]);
-  }
+  this.router.navigate(['/outfits', outfit.id]);
+}
 }

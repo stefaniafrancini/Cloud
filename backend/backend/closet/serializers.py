@@ -12,39 +12,35 @@ class GarmentSerializer(serializers.ModelSerializer):
 
 
 # ---------- Outfit ----------
+# ---------- Outfit ----------
 class OutfitSerializer(serializers.ModelSerializer):
     owner = serializers.PrimaryKeyRelatedField(read_only=True)
-    # El queryset se setea dinámicamente en __init__ para filtrar por el usuario
-    garments = serializers.PrimaryKeyRelatedField(many=True, queryset=Garment.objects.none())
+    garments = serializers.PrimaryKeyRelatedField(
+        many=True,
+        queryset=Garment.objects.all()
+    )
     image = serializers.ImageField(required=False)
 
     class Meta:
         model = Outfit
         fields = ['id', 'owner', 'name', 'image', 'garments']
 
-    def __init__(self, *args, **kwargs):
-        """
-        Filtra las prendas disponibles a las del usuario autenticado.
-        Necesario para el Browsable API y para validaciones automáticas.
-        """
-        super().__init__(*args, **kwargs)
-        request = self.context.get('request')
-        if request and request.user and request.user.is_authenticated:
-            self.fields['garments'].queryset = Garment.objects.filter(owner=request.user)
-
     def validate(self, data):
         garments = data.get('garments', [])
         if len(garments) < 2:
-            raise serializers.ValidationError({"error": "Debe seleccionar al menos 2 prendas."})
+            raise serializers.ValidationError(
+                {"error": "Debe seleccionar al menos 2 prendas."}
+            )
 
         # Seguridad extra: asegurar que todas las prendas son del usuario
         request = self.context.get('request')
         if request and request.user and request.user.is_authenticated:
             invalid = [g.id for g in garments if g.owner_id != request.user.id]
             if invalid:
-                raise serializers.ValidationError({"error": "Hay prendas que no pertenecen al usuario."})
+                raise serializers.ValidationError(
+                    {"error": "Hay prendas que no pertenecen al usuario."}
+                )
         return data
-
 
 # ---------- Folder ----------
 class FolderSerializer(serializers.ModelSerializer):

@@ -1,0 +1,28 @@
+<div class="detail-container" *ngIf="outfit">
+
+  <div class="detail-card">
+
+    <img *ngIf="outfit.image"
+         [src]="outfit.image"
+         alt="Imagen de {{ outfit.name }}"
+         class="detail-image" />
+
+    <h2>{{ outfit.name }}</h2>
+
+    <h4>Prendas incluidas:</h4>
+
+<ul class="garment-list">
+    <li *ngFor="let id of outfit.garments">
+        <div class="garment-item" *ngIf="getGarmentById(id) as g">
+            <img *ngIf="g.image" [src]="g.image" [alt]="g.name" class="garment-thumb" />
+            <span class="garment-name">{{ g.name }}</span>
+        </div>
+    </li>
+</ul>
+
+
+    <button class="back-btn" (click)="volver()">Volver</button>
+
+  </div>
+
+</div>
