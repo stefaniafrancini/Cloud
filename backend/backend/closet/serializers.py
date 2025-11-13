@@ -12,7 +12,6 @@ class GarmentSerializer(serializers.ModelSerializer):
 
 
 # ---------- Outfit ----------
-# ---------- Outfit ----------
 class OutfitSerializer(serializers.ModelSerializer):
     owner = serializers.PrimaryKeyRelatedField(read_only=True)
     garments = serializers.PrimaryKeyRelatedField(
@@ -23,7 +22,7 @@ class OutfitSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Outfit
-        fields = ['id', 'owner', 'name', 'image', 'garments']
+        fields = ['id', 'owner', 'name', 'category', 'image', 'garments']
 
     def validate(self, data):
         garments = data.get('garments', [])
@@ -42,10 +41,10 @@ class OutfitSerializer(serializers.ModelSerializer):
                 )
         return data
 
+
 # ---------- Folder ----------
 class FolderSerializer(serializers.ModelSerializer):
     owner = serializers.PrimaryKeyRelatedField(read_only=True)
-    # Lectura anidada (read-only). La escritura se hace por actions: add_garment / add_outfit
     garments = GarmentSerializer(many=True, read_only=True)
     outfits = OutfitSerializer(many=True, read_only=True)
 
@@ -57,6 +56,5 @@ class FolderSerializer(serializers.ModelSerializer):
         name = (data.get('name') or '').strip().lower()
         is_default = data.get('is_default', False)
         if is_default or name == 'mi ropero':
-            # La creación de la default se maneja automáticamente por view (ensure_default_folder)
             raise serializers.ValidationError("No se puede crear otra carpeta predeterminada.")
         return data

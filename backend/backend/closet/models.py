@@ -29,8 +29,26 @@ class Garment(models.Model):
 
 
 class Outfit(models.Model):
+    OUTFIT_CATEGORY_CHOICES = [
+        ('salir', 'Salir'),
+        ('cena', 'Ir a cenar'),
+        ('fiesta_elegante', 'Fiesta elegante'),
+        ('fiesta_elegante_sport', 'Fiesta elegante sport'),
+        ('trabajo', 'Trabajo'),
+        ('oficina', 'Oficina'),
+        ('cita', 'Cita'),
+        ('playa', 'Playa'),
+        ('evento_formal', 'Evento formal'),
+        ('casual', 'Casual / Diario'),
+    ]
+
     owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='outfits', null=True)
     name = models.CharField(max_length=100)
+    category = models.CharField(
+        max_length=30,
+        choices=OUTFIT_CATEGORY_CHOICES,
+        default='casual',
+    )
     image = models.ImageField(upload_to='outfits/', blank=True, null=True)
     garments = models.ManyToManyField(Garment, blank=True, related_name='outfits')
 
@@ -39,14 +57,14 @@ class Outfit(models.Model):
         ordering = ['name']
 
     def clean(self):
-        # Evitar mezclar prendas de otros usuarios
-        if self.pk:  # solo valida cuando ya existe (para poder asignar M2M)
+        if self.pk:
             for g in self.garments.all():
                 if g.owner_id != self.owner_id:
                     raise ValidationError("Este outfit incluye prendas que no pertenecen al usuario.")
 
     def __str__(self):
         return self.name
+
 
 
 class Folder(models.Model):
