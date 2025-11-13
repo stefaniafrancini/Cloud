@@ -1,11 +1,23 @@
 <h2 class="form-title">Crear Nuevo Outfit</h2>
 
-
 <form (submit)="save(); $event.preventDefault();" class="outfit-form">
   <div>
     <label>Nombre:</label>
     <input [(ngModel)]="name" name="name" required />
   </div>
+
+  <!-- ⭐ nuevo: selector de categoría -->
+  <div>
+  <label>Categoría del outfit:</label>
+  <div class="select-wrapper">
+    <select [(ngModel)]="category" name="category" class="select-category">
+      <option *ngFor="let cat of outfitCategories" [value]="cat.value">
+        {{ cat.label }}
+      </option>
+    </select>
+  </div>
+</div>
+
 
   <div>
     <label>Imagen:</label>
@@ -72,7 +84,6 @@
         <div class="card" *ngFor="let g of getSelectedGarments()">
           <img [src]="g.image" alt="{{ g.name }}" />
           <label class="garment-name">{{ g.name }}</label>
-          <!-- (opcional) mostrar un tilde visual -->
           <div class="checkbox-wrap">
             <input type="checkbox" checked disabled />
           </div>
