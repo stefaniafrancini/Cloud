@@ -15,6 +15,15 @@
         <option value="pantalon">Pantalón</option>
         <option value="zapato">Zapato</option>
         <option value="accesorio">Accesorio</option>
+        <option value="vestido">Vestido</option>
+        <option value="pollera">Pollera</option>
+        <option value="remera">Remera</option>
+        <option value="shorts">Shorts</option>
+        <option value="buzo">Buzo</option>
+        <option value="top">Top</option>
+        <option value="zapatilla">Zapatilla</option>
+        <option value="botas">Botas</option>
+        <option value="otro">Otro</option>
       </select>
     </div>
 
@@ -38,5 +47,15 @@
     <p>Por favor, completá todos los campos:</p>
       <p>nombre, categoría y color.</p>
     <button (click)="closeAlert()">Cerrar</button>
+  </div>
+  
+</div>
+<!-- 🌸 ALERTA ROSA -->
+<div class="alert-backdrop" *ngIf="showalert2">
+  <div class="alert-box">
+    <p><strong>Revisá los datos ingresados</strong></p>
+    <p>Es posible que ya exista una prenda con ese nombre.</p>
+    
+    <button (click)="closeAlert2()">Cerrar</button>
   </div>
 </div>

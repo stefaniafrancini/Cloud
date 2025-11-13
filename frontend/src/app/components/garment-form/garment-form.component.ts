@@ -20,6 +20,7 @@ export class GarmentFormComponent {
   // para mostrar la alerta
   showAlert = false;
   alertMessage = '';
+  showalert2 = false;
 
   constructor(private garmentService: GarmentService) {}
 
@@ -48,17 +49,21 @@ export class GarmentFormComponent {
       next: (res) => {
         console.log('✅ creada', res);
         this.sending = false;
-        location.reload();
+        window.location.href = '/prendas';
       },
       error: (err) => {
         console.error('❌ error POST', err);
-        alert('Error POST: ' + (err?.status || ''));
+        this.alertMessage = 'Ocurrió un error al crear la prenda. Por favor, intentá nuevamente.';
         this.sending = false;
+        this.showalert2 = true;
       },
     });
   }
 
   closeAlert() {
     this.showAlert = false;
+  }
+  closeAlert2() {
+    this.showalert2 = false;
   }
 }
