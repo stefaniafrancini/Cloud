@@ -74,26 +74,4 @@ class Outfit(models.Model):
 
 
 
-class Folder(models.Model):
-    owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='folders', null=True)
-    name = models.CharField(max_length=100)
-    garments = models.ManyToManyField(Garment, blank=True, related_name='folders')
-    outfits = models.ManyToManyField(Outfit, blank=True, related_name='folders')
-    is_default = models.BooleanField(default=False)
-    description = models.TextField(blank=True)
 
-    class Meta:
-        unique_together = [('owner', 'name')]
-        ordering = ['name']
-
-    def clean(self):
-        # Evitar mezclar recursos de otros usuarios
-        for g in self.garments.all():
-            if g.owner_id != self.owner_id:
-                raise ValidationError("La carpeta contiene prendas de otro usuario.")
-        for o in self.outfits.all():
-            if o.owner_id != self.owner_id:
-                raise ValidationError("La carpeta contiene outfits de otro usuario.")
-
-    def __str__(self):
-        return self.name

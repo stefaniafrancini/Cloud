@@ -27,10 +27,7 @@
     <p><strong>Categoría:</strong> {{ g.category }}</p>
     <p><strong>Color:</strong> {{ g.color }}</p>
 
-    <!-- Botón fijo -->
-    <div class="button-row">
-      <button (click)="openModal(g.id!)">Añadir a carpeta</button>
-    </div>
+
 
     <!-- Botones que solo aparecen al activar selección -->
     <div class="action-row" *ngIf="showActions">
@@ -40,13 +37,7 @@
   </div>
 </div>
 
-<!-- Modal -->
-<app-assign-to-folder-modal
-  *ngIf="showModal"
-  [itemId]="selectedGarmentId"
-  itemType="garment"
-  (closed)="showModal = false">
-</app-assign-to-folder-modal>
+
 
 <!-- Modal de Confirmación -->
 <div class="modal-backdrop" *ngIf="showConfirm">

@@ -1,7 +1,7 @@
 # app/urls.py
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from .views import GarmentViewSet, OutfitViewSet, FolderViewSet
+from .views import GarmentViewSet, OutfitViewSet
 from .views import me, register
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
@@ -11,7 +11,6 @@ from rest_framework_simplejwt.views import (
 router = DefaultRouter()
 router.register(r'garments', GarmentViewSet, basename='garment')
 router.register(r'outfits', OutfitViewSet, basename='outfit')
-router.register(r'folders', FolderViewSet, basename='folder')
 
 urlpatterns = [
     path('', include(router.urls)),
