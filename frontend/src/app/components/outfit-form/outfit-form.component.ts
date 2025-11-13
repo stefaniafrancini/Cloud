@@ -20,9 +20,24 @@ export class OutfitFormComponent implements OnInit {
   selectedGarments: number[] = [];
   categorias: string[] = [];
   carouselIndex: { [key: string]: number } = {};
-
-  // 👇 nuevo: controla qué categorías están ocultas
   collapsed: { [key: string]: boolean } = {};
+
+  // ⭐ nuevo: categoría elegida para el outfit
+  category: string = 'casual'; // debe coincidir con un choice del backend
+
+  // ⭐ nuevo: listado de categorías posibles de outfit
+  outfitCategories = [
+    { value: 'salir', label: 'Salir' },
+    { value: 'cena', label: 'Ir a cenar' },
+    { value: 'fiesta_elegante', label: 'Fiesta elegante' },
+    { value: 'fiesta_elegante_sport', label: 'Fiesta elegante sport' },
+    { value: 'trabajo', label: 'Trabajo' },
+    { value: 'oficina', label: 'Oficina' },
+    { value: 'cita', label: 'Cita' },
+    { value: 'playa', label: 'Playa' },
+    { value: 'evento_formal', label: 'Evento formal' },
+    { value: 'casual', label: 'Casual / Diario' },
+  ];
 
   modalVisible = false;
   modalMessage = '';
@@ -39,7 +54,7 @@ export class OutfitFormComponent implements OnInit {
       this.categorias = [...new Set(this.garments.map(g => g.category))];
       this.categorias.forEach(c => {
         this.carouselIndex[c] = 0;
-        this.collapsed[c] = true; // 👉 arrancan ocultas
+        this.collapsed[c] = true;
       });
     });
   }
@@ -75,12 +90,10 @@ export class OutfitFormComponent implements OnInit {
     }
   }
 
-  // 👇 nuevo: toggle mostrar/ocultar por categoría
   toggleCategoria(categoria: string): void {
     this.collapsed[categoria] = !this.collapsed[categoria];
   }
 
-  // 👇 nuevo: contar seleccionados por categoría
   selectedCount(categoria: string): number {
     const idsCat = this.getPrendasPorCategoria(categoria).map(g => g.id);
     return this.selectedGarments.filter(id => idsCat.includes(id!)).length;
@@ -115,6 +128,9 @@ export class OutfitFormComponent implements OnInit {
     formData.append('name', this.name);
     formData.append('image', this.imageFile);
 
+    // ⭐ nuevo: enviar categoría al backend
+    formData.append('category', this.category);
+
     this.selectedGarments.forEach(id => {
       formData.append('garments', id.toString());
     });
@@ -126,9 +142,8 @@ export class OutfitFormComponent implements OnInit {
       this.mostrarModal('Ocurrió un error al crear el outfit.');
     });
   }
- getSelectedGarments(): Garment[] {
-  return this.garments.filter(g => this.selectedGarments.includes(g.id!));
-}
 
-
+  getSelectedGarments(): Garment[] {
+    return this.garments.filter(g => this.selectedGarments.includes(g.id!));
+  }
 }
