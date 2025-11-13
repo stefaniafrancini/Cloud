@@ -9,6 +9,15 @@ class Garment(models.Model):
         ('pantalon', 'Pantalón'),
         ('zapato', 'Zapato'),
         ('accesorio', 'Accesorio'),
+        ('vestido', 'Vestido'),
+        ('pollera', 'Pollera'),
+        ('remera', 'Remera'),
+        ('shorts', 'Shorts'),
+        ('buzo', 'Buzo'),
+        ('top', 'Top'),
+        ('zapatilla', 'Zapatilla'),
+        ('botas', 'Botas'),
+        ('otro', 'Otro'),
     ]
 
     owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='garments', null=True)
