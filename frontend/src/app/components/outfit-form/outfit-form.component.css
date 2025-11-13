@@ -247,3 +247,45 @@
   margin: 0 auto 18px; /* centradito con espacio abajo */
   letter-spacing: .3px;
 }
+
+/* --- SELECT CATEGORÍA --- */
+
+.select-wrapper {
+  position: relative;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.outfit-form .select-category {
+  width: 100%;
+  display: block;
+  padding: 10px 40px 10px 14px; /* espacio a la derecha para la flechita */
+  border-radius: 15px;
+  border: 1px solid #E694B0;
+  box-sizing: border-box;
+  background-color: #fae8f1;
+  color: #c2185b;
+  font-size: 14px;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+/* flechita custom */
+.select-wrapper::after {
+  content: "▾";
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: #c2185b;
+  font-size: 16px;
+}
+
+/* focus suave como el input de nombre */
+.outfit-form .select-category:focus {
+  outline: none;
+  border-color: #c2185b;
+  box-shadow: 0 0 0 3px rgba(194, 24, 91, 0.15);
+}
