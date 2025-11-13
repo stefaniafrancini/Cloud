@@ -2,32 +2,54 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
 
+
 @Injectable({
     providedIn: 'root'
 })
 export class AuthService {
-    // Ajustá la base según tu back
-    private apiUrl = 'http://localhost:8000/api/auth/token';
+    private baseAuthUrl = 'http://localhost:8000/api/auth/';
+
     constructor(private http: HttpClient) { }
 
-    // --- Auth endpoints básicos --
+    // --- LOGIN ---
     login(username: string, password: string) {
         return this.http.post<{ access: string; refresh: string }>(
-            'http://localhost:8000/api/auth/token/',
+            this.baseAuthUrl + 'token/',
             { username, password }
         ).pipe(
-            tap(res => localStorage.setItem('token', res.access))
+            tap(res => {
+                localStorage.setItem('token', res.access);
+                localStorage.setItem('refresh', res.refresh);
+            })
         );
     }
 
-
-    // opcional si tenés registro en el back
-    register(payload: { username: string; email?: string; password: string }): Observable<any> {
-        return this.http.post<any>(`${this.apiUrl}register/`, payload);
+    // --- REGISTER ---
+    register(payload: { username: string; email?: string; password: string }) {
+        return this.http.post<{
+            user: { id: number; username: string; email: string | null };
+            access: string;
+            refresh: string;
+        }>(
+            this.baseAuthUrl + 'register/',
+            payload
+        ).pipe(
+            tap(res => {
+                // Opcional: loguear automáticamente después de registrarse
+                if (res.access) {
+                    localStorage.setItem('token', res.access);
+                }
+                if (res.refresh) {
+                    localStorage.setItem('refresh', res.refresh);
+                }
+            })
+        );
     }
 
     me(): Observable<any> {
-        return this.http.get<any>(`${this.apiUrl}me/`, { headers: this.authHeaders() });
+        return this.http.get<any>(this.baseAuthUrl + 'me/', {
+            headers: this.authHeaders()
+        });
     }
 
     // --- Helpers de token ---
@@ -48,9 +70,15 @@ export class AuthService {
         localStorage.removeItem('refresh');
     }
 
-    // Headers con Authorization para reutilizar en otros services
     authHeaders(): HttpHeaders {
         const token = this.getToken();
         return new HttpHeaders(token ? { Authorization: `Bearer ${token}` } : {});
     }
+
+    forgotPassword(payload: { username?: string; email?: string; new_password: string }) {
+  return this.http.post<{ detail: string }>(
+    this.baseAuthUrl + 'forgot-password/',
+    payload
+  );
+}
 }

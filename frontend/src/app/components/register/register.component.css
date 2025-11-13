@@ -1,0 +1,315 @@
+/* === Paleta ===
+Rosa principal: #ff7eb3
+Rosa pastel:    #ffd1dc
+Blush:          #ffe9f1
+Crema:          #fff7fb
+Texto gris:     #3b3b3b
+================= */
+
+/* Fondo */
+.login-container {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: linear-gradient(160deg, #fff7fb 0%, #ffe9f1 45%, #ffd1dc 100%);
+  position: relative;
+  overflow: hidden;
+  font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+/* Blobs decorativos */
+.bg-blob {
+  position: absolute;
+  filter: blur(60px);
+  opacity: 0.6;
+  pointer-events: none;
+}
+.blob-1 {
+  width: 420px;
+  height: 420px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #ff7eb3, #ffd1dc 60%, transparent 70%);
+  top: -120px;
+  left: -80px;
+}
+.blob-2 {
+  width: 380px;
+  height: 380px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 70% 40%, #ffc0cb, #fff0f5 55%, transparent 70%);
+  bottom: -100px;
+  right: -60px;
+}
+.blob-3 {
+  width: 260px;
+  height: 260px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 50% 50%, #ffe6ef, #ffd1dc 60%, transparent 75%);
+  top: 40%;
+  left: 55%;
+  transform: translate(-50%, -50%);
+}
+
+/* Tarjeta */
+.login-card {
+  width: min(92vw, 440px);
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: saturate(150%) blur(10px);
+  border: 1px solid rgba(255, 126, 179, 0.18);
+  padding: 36px 28px;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(255, 126, 179, 0.15);
+  position: relative;
+  overflow: hidden;
+  mask-image: radial-gradient(white, black);
+  -webkit-mask-image: -webkit-radial-gradient(white, black);
+}
+
+/* Marca */
+.brand {
+  text-align: center;
+  margin-bottom: 8px;
+}
+.brand-mark {
+  display: inline-grid;
+  place-items: center;
+  width: 64px;
+  height: 64px;
+  margin-inline: auto;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #ff7eb3, #ffd1dc);
+  box-shadow: 0 6px 16px rgba(255, 126, 179, 0.35);
+}
+.brand-mark .hanger {
+  width: 32px;
+  height: 32px;
+  fill: white;
+}
+.brand-title {
+  font-size: 24px;
+  font-weight: 800;
+  letter-spacing: 0.4px;
+  color: #3b3b3b;
+  margin: 10px 0 2px;
+  line-height: 1.1;
+}
+.brand-subtitle {
+  font-size: 13px;
+  color: #6b6b6b;
+  margin: 0 0 12px;
+  line-height: 1.2;
+}
+
+.login-title {
+  text-align: center;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  color: #3b3b3b;
+  margin: 4px 0 18px;
+}
+
+/* Inputs */
+.form-group {
+  margin-bottom: 18px;
+}
+label {
+  display: block;
+  font-weight: 600;
+  color: #4a4a4a;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+.input-wrap {
+  position: relative;
+  display: grid;
+  align-items: center;
+}
+.input-icon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 0.7;
+}
+.input-icon svg {
+  width: 18px;
+  height: 18px;
+  fill: #c37a9b;
+}
+
+/* Campo de texto */
+input.form-control {
+  width: 100%;
+  height: 48px;
+  padding: 12px 48px 12px 44px;
+  border: 1.5px solid #f6c7d3;
+  border-radius: 12px;
+  font-size: 15px;
+  color: #2e2e2e;
+  background: #fffafc;
+  transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+}
+input.form-control:focus {
+  outline: none;
+  border-color: #ff9fc2;
+  background: #ffffff;
+  box-shadow: 0 0 0 4px rgba(255, 159, 194, 0.18);
+}
+
+/* Botón para mostrar/ocultar contraseña */
+.pw-toggle {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: none;
+  background: transparent;
+  padding: 6px;
+  border-radius: 8px;
+  cursor: pointer;
+  opacity: 0.7;
+  line-height: 0;
+}
+.pw-toggle:hover {
+  opacity: 1;
+  background: #fff0f5;
+}
+.pw-toggle svg {
+  width: 20px;
+  height: 20px;
+  fill: #c37a9b;
+}
+
+/* Botón ingresar */
+.btn-login {
+  width: 100%;
+  margin-top: 6px;
+  background: linear-gradient(135deg, #ff7eb3, #ff9fc2);
+  color: #fff;
+  border: none;
+  padding: 12px 14px;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  cursor: pointer;
+  transition: transform 0.08s ease, box-shadow 0.2s ease, filter 0.2s ease;
+  box-shadow: 0 10px 20px rgba(255, 126, 179, 0.25);
+}
+.btn-login:hover {
+  filter: brightness(1.03);
+  box-shadow: 0 14px 26px rgba(255, 126, 179, 0.33);
+}
+.btn-login:active {
+  transform: translateY(1px);
+}
+.btn-login:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Texto de error */
+.error-text {
+  color: #d7263d;
+  text-align: center;
+  margin-top: 10px;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+/* Links extra */
+.form-extra {
+  margin-top: 14px;
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.link {
+  color: #c75f8e;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 13px;
+  padding: 6px 8px;
+  border-radius: 8px;
+  transition: background-color 0.2s, color 0.2s;
+  white-space: nowrap;
+}
+.link:hover {
+  background-color: #fff0f5;
+  color: #a74874;
+}
+
+/* Responsive */
+@media (max-width: 420px) {
+  .login-card {
+    padding: 28px 20px;
+  }
+  input.form-control {
+    height: 46px;
+  }
+  .btn-login {
+    min-height: 46px;
+  }
+}
+/* ===== Fixes para que no rompa ===== */
+
+/* evita que padding + border agranden el ancho efectivo */
+:host, .login-container, .login-card, .form-group, .input-wrap, .form-control, .btn-login {
+  box-sizing: border-box;
+}
+
+/* la tarjeta nunca supera el viewport y no deja que nada se "escape" */
+.login-card {
+  max-width: 440px;         /* tope estricto */
+  width: 100%;              /* ocupa el disponible dentro de la grilla */
+  overflow: hidden;         /* recorta cualquier sombra/absoluto rebelde */
+}
+
+/* el wrapper del input no crece más que la tarjeta */
+.input-wrap {
+  width: 100%;
+  grid-template-columns: 1fr; /* asegura layout simple */
+}
+
+/* que el input use TODO el ancho disponible sin romper */
+input.form-control {
+  display: block;           /* evita inline-artifacts */
+  max-width: 100%;          /* nunca más ancho que el contenedor */
+  min-width: 0;             /* permite que el grid lo contraiga si hace falta */
+}
+
+/* el botón de mostrar contraseña no empuja el layout */
+.pw-toggle {
+  right: 10px;
+}
+
+/* el contenedor ocupa pantalla completa y centra la tarjeta */
+.login-container {
+  min-height: 100dvh;       /* mejor que 100vh en móviles */
+  width: 100%;
+  padding: 24px 16px;       /* un poquito menos para pantallas chicas */
+  overflow: auto;           /* si algo es muy alto, scrollea, no rompe */
+}
+/* Bloquea cualquier scroll mientras esté el login activo */
+:host {
+  position: fixed;
+  inset: 0; /* top:0; right:0; bottom:0; left:0; */
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Evita scroll lateral o extra */
+html, body {
+  overflow: hidden;
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+

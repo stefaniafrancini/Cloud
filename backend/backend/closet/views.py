@@ -5,7 +5,9 @@ from rest_framework.decorators import action, api_view, permission_classes
 from rest_framework.response import Response
 from rest_framework.parsers import MultiPartParser, FormParser, JSONParser
 from rest_framework.permissions import IsAuthenticated
-
+from django.contrib.auth.models import User
+from rest_framework.permissions import AllowAny
+from rest_framework_simplejwt.tokens import RefreshToken
 from .models import Garment, Outfit, Folder
 from .serializers import GarmentSerializer, OutfitSerializer, FolderSerializer
 
@@ -139,3 +141,51 @@ class FolderViewSet(OwnerViewSetMixin, viewsets.ModelViewSet):
 def me(request):
     u = request.user
     return Response({"id": u.id, "username": u.username, "email": u.email})
+
+
+@api_view(["POST"])
+@permission_classes([AllowAny])
+def register(request):
+    username = (request.data.get("username") or "").strip()
+    password = request.data.get("password") or ""
+    email = (request.data.get("email") or "").strip().lower()
+
+    if not username or not password:
+        return Response(
+            {"detail": "Username y password son obligatorios."},
+            status=status.HTTP_400_BAD_REQUEST
+        )
+
+    if User.objects.filter(username__iexact=username).exists():
+        return Response(
+            {"detail": "Ese usuario ya existe."},
+            status=status.HTTP_400_BAD_REQUEST
+        )
+
+    if email and User.objects.filter(email__iexact=email).exists():
+        return Response(
+            {"detail": "Ese email ya está registrado."},
+            status=status.HTTP_400_BAD_REQUEST
+        )
+
+    user = User.objects.create_user(
+        username=username,
+        email=email or None,
+        password=password
+    )
+
+    refresh = RefreshToken.for_user(user)
+    access = refresh.access_token
+
+    return Response(
+        {
+            "user": {
+                "id": user.id,
+                "username": user.username,
+                "email": user.email,
+            },
+            "access": str(access),
+            "refresh": str(refresh),
+        },
+        status=status.HTTP_201_CREATED
+    )

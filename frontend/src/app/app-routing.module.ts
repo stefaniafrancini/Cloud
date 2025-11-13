@@ -73,7 +73,27 @@ export const routes: Routes = [
         .then(m => m.FolderEditComponent)
   },
 
-  { path: '**', redirectTo: 'login' }
+  { path: 'outfits/:id',
+    canActivate: [AuthGuard],
+    loadComponent: () =>
+      import('./components/outfit-detail/outfit-detail.component')
+        .then(m => m.OutfitDetailComponent)
+  },
+{
+  path: 'register',
+  loadComponent: () =>
+    import('./components/register/register.component')
+      .then(m => m.RegisterComponent)
+},
+{
+  path: 'forgot',
+  loadComponent: () =>
+    import('./components/forgot/forgot.component')
+      .then(m => m.ForgotComponent)
+},
+
+  { path: '**', redirectTo: 'home' }
+
 ];
 
 @NgModule({

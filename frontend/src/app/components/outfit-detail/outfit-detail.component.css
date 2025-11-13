@@ -1,0 +1,104 @@
+/* Contenedor general */
+.detail-container {
+  display: flex;
+  justify-content: center;
+  padding: 40px 20px;
+}
+
+/* Tarjeta principal */
+.detail-card {
+  width: 350px;
+  background: #ffeaf4;
+  padding: 30px 20px;
+  border-radius: 22px;
+  border: 2px solid #ffbcd4;
+  box-shadow: 0px 4px 10px rgba(255, 128, 170, 0.25);
+  text-align: center;
+}
+
+/* Imagen */
+.detail-image {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 18px;
+  margin-bottom: 20px;
+  border: 2px solid #ffcce1;
+}
+
+/* Título */
+.detail-card h2 {
+  color: #c2185b;
+  font-size: 1.6rem;
+  margin-bottom: 10px;
+}
+
+/* Subtítulo */
+.detail-card h4 {
+  color: #a74b77;
+  font-size: 1.1rem;
+  margin-top: 15px;
+}
+
+/* Lista de prendas */
+.detail-card ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 10px;
+}
+
+.detail-card li {
+  color: #6a5675;
+  font-size: 1rem;
+  padding: 4px 0;
+}
+
+/* Botón Volver */
+.back-btn {
+  margin-top: 20px;
+  background-color: #ff6fa9;
+  color: white;
+  border: none;
+  padding: 10px 25px;
+  border-radius: 22px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.back-btn:hover {
+  background-color: #d8558b;
+}
+/* Lista de prendas */
+.garment-list {
+  list-style: none;
+  padding: 0;
+  margin-top: 10px;
+}
+
+/* Ítem de prenda: mini card dentro del detalle */
+.garment-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 10px;
+  margin-bottom: 6px;
+  background: #ffe1f0;
+  border-radius: 14px;
+  border: 1px solid #ffcce1;
+}
+
+/* Miniatura */
+.garment-thumb {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  object-fit: cover;
+  border: 1px solid #ffbcd4;
+}
+
+/* Nombre de la prenda */
+.garment-name {
+  color: #6a5675;
+  font-size: 0.95rem;
+}
