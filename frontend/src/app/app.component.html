@@ -1,5 +1,5 @@
 <!-- app.component.html -->
-<nav class="navbar">
+<nav *ngIf="showNavbar" class="navbar">
   <div class="navbar-left">
     <a routerLink="/" class="logo-link" aria-label="Inicio">
       <img src="/logo.jpg" alt="Mi Ropero" class="logo-img" />
@@ -7,7 +7,6 @@
   </div>
 
   <div class="navbar-right">
-    <!-- Dropdown Prendas -->
     <div class="dropdown">
       <button class="dropbtn">Prendas</button>
       <div class="dropdown-content">
@@ -16,7 +15,6 @@
       </div>
     </div>
 
-    <!-- Dropdown Outfits -->
     <div class="dropdown">
       <button class="dropbtn">Outfits</button>
       <div class="dropdown-content">
@@ -24,7 +22,6 @@
         <a routerLink="/crear-outfit">Crear Outfit</a>
       </div>
     </div>
-
   </div>
 </nav>
 

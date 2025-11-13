@@ -16,7 +16,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('name', models.CharField(max_length=100)),
-                ('category', models.CharField(choices=[('camisa', 'Camisa'), ('pantalon', 'Pantalón'), ('zapato', 'Zapato'), ('accesorio', 'Accesorio')], max_length=20)),
+                ('category', models.CharField(choices=[('camisa', 'Camisa'), ('pantalon', 'Pantalón'), ('zapato', 'Zapato'), ('accesorio', 'Accesorio'),], max_length=20)),
                 ('color', models.CharField(max_length=50)),
                 ('image', models.ImageField(upload_to='garments/')),
             ],
