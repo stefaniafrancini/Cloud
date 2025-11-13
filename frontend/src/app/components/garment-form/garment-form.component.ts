@@ -48,7 +48,7 @@ export class GarmentFormComponent {
       next: (res) => {
         console.log('✅ creada', res);
         this.sending = false;
-        location.reload();
+        window.location.href = '/prendas';
       },
       error: (err) => {
         console.error('❌ error POST', err);

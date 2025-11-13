@@ -60,6 +60,6 @@ export class GarmentEditComponent implements OnInit {
 
   closeModal() {
     this.showSuccess = false;
-    this.router.navigate(['/']);
+    this.router.navigate(['/prendas']);
   }
 }
