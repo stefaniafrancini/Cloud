@@ -26,8 +26,6 @@ class Garment(models.Model):
     color = models.CharField(max_length=50)
     image = models.ImageField(upload_to='garments/')
 
-
-
     class Meta:
         unique_together = [('owner', 'name')]
         indexes = [models.Index(fields=['owner', 'category'])]
