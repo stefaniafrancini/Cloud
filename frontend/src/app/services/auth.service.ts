@@ -74,4 +74,11 @@ export class AuthService {
         const token = this.getToken();
         return new HttpHeaders(token ? { Authorization: `Bearer ${token}` } : {});
     }
+
+    forgotPassword(payload: { username?: string; email?: string; new_password: string }) {
+  return this.http.post<{ detail: string }>(
+    this.baseAuthUrl + 'forgot-password/',
+    payload
+  );
+}
 }

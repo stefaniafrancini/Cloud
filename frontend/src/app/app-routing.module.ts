@@ -85,6 +85,12 @@ export const routes: Routes = [
     import('./components/register/register.component')
       .then(m => m.RegisterComponent)
 },
+{
+  path: 'forgot',
+  loadComponent: () =>
+    import('./components/forgot/forgot.component')
+      .then(m => m.ForgotComponent)
+},
 
   { path: '**', redirectTo: 'home' }
 
