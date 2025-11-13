@@ -37,6 +37,8 @@
             required
             autocomplete="username"
           />
+          <p class="field-error" *ngIf="errorUsername">{{ errorUsername }}</p>
+
         </div>
       </div>
 
@@ -58,6 +60,8 @@
             name="email"
             autocomplete="email"
           />
+          <p class="field-error" *ngIf="errorEmail">{{ errorEmail }}</p>
+
         </div>
       </div>
 

@@ -17,6 +17,9 @@ export class RegisterComponent {
   password = '';
   confirmPassword = '';
   error = '';
+  errorUsername = '';
+  errorEmail = '';
+
 
   constructor(
     private auth: AuthService,
@@ -25,6 +28,9 @@ export class RegisterComponent {
 
   onRegister() {
     this.error = '';
+    this.errorUsername = '';
+    this.errorEmail = '';
+
 
     if (!this.username || !this.password) {
       this.error = 'Usuario y contraseña son obligatorios.';
@@ -46,9 +52,18 @@ export class RegisterComponent {
       },
       error: (err) => {
         console.error(err);
-        this.error =
-          err.error?.detail ||
-          'No se pudo crear la cuenta. Intentalo de nuevo.';
+        const code = err.error?.code;
+        const detail = err.error?.detail;
+
+        if (code === 'username_exists') {
+          this.errorUsername = detail || 'Ese usuario ya existe.';
+        } else if (code === 'email_exists') {
+          this.errorEmail = detail || 'Ese email ya está registrado.';
+        } else {
+          this.error =
+            detail ||
+            'No se pudo crear la cuenta. Intentalo de nuevo.';
+        }
       }
     });
   }

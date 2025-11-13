@@ -152,7 +152,9 @@ def register(request):
 
     if not username or not password:
         return Response(
-            {"detail": "Username y password son obligatorios."},
+            {"detail": "Username y password son obligatorios.",
+            "code": "username_exists",  
+            "field": "username",  },
             status=status.HTTP_400_BAD_REQUEST
         )
 
@@ -164,7 +166,9 @@ def register(request):
 
     if email and User.objects.filter(email__iexact=email).exists():
         return Response(
-            {"detail": "Ese email ya está registrado."},
+            {"detail": "Ese email ya está registrado.",
+            "code": "email_exists",     
+            "field": "email",},
             status=status.HTTP_400_BAD_REQUEST
         )
 

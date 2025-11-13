@@ -313,3 +313,8 @@ html, body {
   padding: 0;
 }
 
+.field-error {
+  color: #ff4d6a;
+  font-size: 0.85rem;
+  margin-top: 4px;
+}
