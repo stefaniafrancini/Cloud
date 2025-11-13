@@ -79,6 +79,12 @@ export const routes: Routes = [
       import('./components/outfit-detail/outfit-detail.component')
         .then(m => m.OutfitDetailComponent)
   },
+{
+  path: 'register',
+  loadComponent: () =>
+    import('./components/register/register.component')
+      .then(m => m.RegisterComponent)
+},
 
   { path: '**', redirectTo: 'home' }
 
