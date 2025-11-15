@@ -74,7 +74,7 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 
 DATABASES = {
     "default": {
-        "ENGINE": "sql_server.pyodbc",
+        "ENGINE": "mssql",
         "NAME": "tuRoperobd",
         "USER": "joaquin",
         "PASSWORD": "turopero1.",
@@ -82,8 +82,7 @@ DATABASES = {
         "PORT": "1433",  
 
         "OPTIONS": {
-            'driver': 'pymssql',
-            'host_is_server': True,
+            "driver": "ODBC Driver 18 for SQL Server",
             # opcional:
             # "encrypt": True,
             # "trust_server_certificate": False,
