@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class GarmentService {
-  private apiUrl = 'https://cloud-1-nel4.onrender.com/api/garments/';
+  private apiUrl = 'https://cloud-2-i8un.onrender.com/api/garments/';
 
   constructor(private http: HttpClient) {}
 

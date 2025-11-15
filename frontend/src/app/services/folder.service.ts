@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class FolderService {
-  private apiUrl = 'https://cloud-1-nel4.onrender.com/api/folders/';
+  private apiUrl = 'https://cloud-2-i8un.onrender.com/api/folders/';
 
   constructor(private http: HttpClient) {}
 
