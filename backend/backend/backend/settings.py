@@ -37,7 +37,6 @@ INSTALLED_APPS = [
     'rest_framework',
     'corsheaders',
     'closet',
-    'mssql',
     
 ]
 
