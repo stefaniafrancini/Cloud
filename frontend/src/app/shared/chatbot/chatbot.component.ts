@@ -79,18 +79,18 @@ export class ChatbotComponent {
     this.isOpen = !this.isOpen;
   }
 
- getOutfitImageUrl(path: string): string {
-  // Tu backend probablemente sirve las imágenes en /media/outfits/...
-  const baseUrl = 'http://127.0.0.1:8000';
+ 
 
-  // Si el path viene como "outfits/archivo.jpg", queda:
-  // http://127.0.0.1:8000/media/outfits/archivo.jpg
-  const cleanPath = path.replace(/^\/+/, ''); // por si viniera con "/" adelante
-  const fullUrl = baseUrl + cleanPath;
+  getOutfitImageUrl(path: string): string {
+  if (!path) return '';
 
-  console.log('🖼 URL final imagen outfit:', fullUrl);
-  return fullUrl;
+  const baseUrl = 'http://127.0.0.1:8000/media/';
+
+  const cleanPath = path.replace(/^\/+/, '');
+  return baseUrl + cleanPath;
 }
+
+
 
 
 
