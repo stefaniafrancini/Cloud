@@ -146,3 +146,7 @@
   font-weight: bold;
   color: #c2185b;
 }
+
+.outfit-card {
+  cursor: pointer;
+}

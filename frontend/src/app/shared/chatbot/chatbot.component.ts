@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ChatbotService } from '../../services/chatbot.service';
+import { Router } from '@angular/router';
 
 interface OutfitSuggestion {
   id: number;
@@ -39,7 +40,7 @@ export class ChatbotComponent {
   private outfitImageBaseUrl =
     'https://miropero-dzg4c8b4gyhxgca7.eastus-01.azurewebsites.net/';
 
-  constructor(private chatbotService: ChatbotService) {
+  constructor(private chatbotService: ChatbotService, private router: Router ) {
     // ------------------------------
     // 🔸 Session ID persistente
     // ------------------------------
@@ -90,8 +91,9 @@ export class ChatbotComponent {
   return baseUrl + cleanPath;
 }
 
-
-
+openOutfitDetail(outfitId: number) {
+  this.router.navigate(['/outfits', outfitId]);
+}
 
 
 

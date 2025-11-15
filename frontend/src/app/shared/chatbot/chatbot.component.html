@@ -23,15 +23,20 @@
 
         <!-- tarjetas de outfits sugeridos -->
         <div class="outfit-list" *ngIf="msg.outfits">
-          <div class="outfit-card" *ngFor="let outfit of msg.outfits">
-            <img
-              [src]="getOutfitImageUrl(outfit.image)"
-              class="outfit-img"
-              alt="Outfit sugerido"
-            />
-            <div class="outfit-name">{{ outfit.name }}</div>
-          </div>
-        </div>
+  <div
+    class="outfit-card"
+    *ngFor="let outfit of msg.outfits"
+    (click)="openOutfitDetail(outfit.id)"
+  >
+    <img
+      [src]="getOutfitImageUrl(outfit.image)"
+      class="outfit-img"
+      alt="Outfit sugerido"
+    />
+    <div class="outfit-name">{{ outfit.name }}</div>
+  </div>
+</div>
+
 
       </div>
 
