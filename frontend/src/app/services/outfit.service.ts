@@ -7,7 +7,7 @@ import { Outfit } from '../models/outfit.model';
   providedIn: 'root'
 })
 export class OutfitService {
-  private apiUrl = 'http://localhost:8000/api/outfits/';
+  private apiUrl = 'https://cloud-1-nel4.onrender.com/api/outfits/';
 
   constructor(private http: HttpClient) {}
 
