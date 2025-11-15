@@ -1,0 +1,58 @@
+<!-- Botón flotante del chat -->
+<div class="chatbot-button" (click)="toggleChat()">
+  <img src="/logo.jpg" alt="Chat" />
+</div>
+
+<!-- Ventana del chatbot -->
+<div class="chatbot-window" *ngIf="isOpen">
+  <div class="chatbot-header">
+    <span>Asistente Virtual</span>
+    <button class="close-btn" (click)="toggleChat()">✕</button>
+  </div>
+
+  <!-- Zona de mensajes -->
+  <div class="chatbot-body">
+    <div class="messages-container">
+
+      <div *ngFor="let msg of messages" class="msg-block">
+
+        <!-- texto del mensaje -->
+        <div class="msg" [ngClass]="msg.sender" *ngIf="msg.text">
+          {{ msg.text }}
+        </div>
+
+        <!-- tarjetas de outfits sugeridos -->
+        <div class="outfit-list" *ngIf="msg.outfits">
+          <div class="outfit-card" *ngFor="let outfit of msg.outfits">
+            <img
+              [src]="getOutfitImageUrl(outfit.image)"
+              class="outfit-img"
+              alt="Outfit sugerido"
+            />
+            <div class="outfit-name">{{ outfit.name }}</div>
+          </div>
+        </div>
+
+      </div>
+
+      <div *ngIf="isLoading" class="msg bot typing">
+        Escribiendo...
+      </div>
+    </div>
+  </div>
+
+  <!-- Zona para escribir -->
+  <div class="chatbot-input">
+    <input
+      type="text"
+      [(ngModel)]="userInput"
+      placeholder="Escribe un mensaje..."
+      (keyup.enter)="sendMessage()"
+      [disabled]="isLoading"
+    />
+
+    <button class="send-btn" (click)="sendMessage()" [disabled]="isLoading">
+      ➤
+    </button>
+  </div>
+</div>

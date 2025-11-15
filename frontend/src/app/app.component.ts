@@ -2,12 +2,13 @@ import { Component } from '@angular/core';
 import { RouterOutlet, RouterLink } from '@angular/router';
 import { Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
-import { NgIf } from '@angular/common';   // ⬅️ NECESARIO para *ngIf
+import { NgIf } from '@angular/common';   
+import { ChatbotComponent } from './shared/chatbot/chatbot.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, RouterLink, NgIf],  // ⬅️ agrega NgIf
+  imports: [RouterOutlet, RouterLink, NgIf, ChatbotComponent],  // ⬅️ agrega NgIf y ChatbotComponent
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
