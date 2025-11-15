@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Garment, Outfit, Folder
+from .models import Garment, Outfit
 
 # ---------- Garment ----------
 class GarmentSerializer(serializers.ModelSerializer):
@@ -42,19 +42,3 @@ class OutfitSerializer(serializers.ModelSerializer):
         return data
 
 
-# ---------- Folder ----------
-class FolderSerializer(serializers.ModelSerializer):
-    owner = serializers.PrimaryKeyRelatedField(read_only=True)
-    garments = GarmentSerializer(many=True, read_only=True)
-    outfits = OutfitSerializer(many=True, read_only=True)
-
-    class Meta:
-        model = Folder
-        fields = ['id', 'owner', 'name', 'is_default', 'description', 'garments', 'outfits']
-
-    def validate(self, data):
-        name = (data.get('name') or '').strip().lower()
-        is_default = data.get('is_default', False)
-        if is_default or name == 'mi ropero':
-            raise serializers.ValidationError("No se puede crear otra carpeta predeterminada.")
-        return data

@@ -15,8 +15,8 @@ export const routes: Routes = [
   { path: 'home',
     canActivate: [AuthGuard],
     loadComponent: () =>
-      import('./components/folder-list/folder-list.component')
-        .then(m => m.FolderListComponent)
+      import('./components/outfit-list/outfit-list.component')
+        .then(m => m.OutfitListComponent)
   },
   { path: 'crear-prenda',
     canActivate: [AuthGuard],
@@ -42,37 +42,12 @@ export const routes: Routes = [
       import('./components/outfit-form/outfit-form.component')
         .then(m => m.OutfitFormComponent)
   },
-  { path: 'carpetas',
-    canActivate: [AuthGuard],
-    loadComponent: () =>
-      import('./components/folder-list/folder-list.component')
-        .then(m => m.FolderListComponent)
-  },
-  { path: 'crear-carpeta',
-    canActivate: [AuthGuard],
-    loadComponent: () =>
-      import('./components/folder-form/folder-form.component')
-        .then(m => m.FolderFormComponent)
-  },
-  { path: 'carpetas/:id',
-    canActivate: [AuthGuard],
-    loadComponent: () =>
-      import('./components/folder-detail/folder-detail.component')
-        .then(m => m.FolderDetailComponent)
-  },
   { path: 'prendas',
     canActivate: [AuthGuard],
     loadComponent: () =>
       import('./components/garment-list/garment-list.component')
         .then(m => m.GarmentListComponent)
   },
-  { path: 'editar-carpeta/:id',
-    canActivate: [AuthGuard],
-    loadComponent: () =>
-      import('./components/folder-edit/folder-edit.component')
-        .then(m => m.FolderEditComponent)
-  },
-
   { path: 'outfits/:id',
     canActivate: [AuthGuard],
     loadComponent: () =>

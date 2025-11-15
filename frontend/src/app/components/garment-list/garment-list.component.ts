@@ -4,14 +4,13 @@ import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { GarmentService } from '../../services/garment.service';
 import { Garment } from '../../models/garment.model';
-import { AssignToFolderModalComponent } from '../assign-to-folder-modal/assign-to-folder-modal.component';
 
 @Component({
   selector: 'app-garment-list',
   standalone: true,
   templateUrl: './garment-list.component.html',
   styleUrls: ['./garment-list.component.css'],
-  imports: [CommonModule, RouterModule, FormsModule, AssignToFolderModalComponent]
+  imports: [CommonModule, RouterModule, FormsModule]
 })
 export class GarmentListComponent implements OnInit {
   garments: Garment[] = [];

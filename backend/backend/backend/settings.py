@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'corsheaders',
     'closet',
+    'mssql',
     
 ]
 
@@ -73,11 +74,23 @@ TEMPLATES = [
 WSGI_APPLICATION = 'backend.wsgi.application'
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+    "default": {
+        "ENGINE": "mssql",
+        "NAME": "tuRoperobd",
+        "USER": "joaquin",
+        "PASSWORD": "turopero1.",
+        "HOST": "turopero.database.windows.net",
+        "PORT": "1433",  
+
+        "OPTIONS": {
+            "driver": "ODBC Driver 18 for SQL Server",
+            # opcional:
+            # "encrypt": True,
+            # "trust_server_certificate": False,
+        },
     }
 }
+
 
 AUTH_PASSWORD_VALIDATORS = [
     {
